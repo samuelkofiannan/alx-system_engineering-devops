@@ -1,3 +1,9 @@
+/*
+ * File: 102-zombie.c
+ * Auth: Brennan D Baraban
+ */
+
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -25,16 +31,16 @@ int infinite_while(void)
 int main(void)
 {
 	pid_t pid;
-	char i = 0;
+	char count = 0;
 
-	while (i < 5)
+	while (count < 5)
 	{
 		pid = fork();
 		if (pid > 0)
 		{
 			printf("Zombie process created, PID: %d\n", pid);
 			sleep(1);
-			i++;
+			count++;
 		}
 		else
 			exit(0);
