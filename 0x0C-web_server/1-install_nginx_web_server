@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# install nginx
-# listening on port 80
-# returns a page containing string when sent a GET request at root
-sudo apt-get update
-sudo apt-get -y install nginx
+# Install the web server 'nginx' on the server
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install nginx -y
+ufw allow 'Nginx HTTP'
+echo "Hello World!" > /var/www/html/index.html
 sudo service nginx start
-sudo rm /usr/share/nginx/html/index.html
-echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
