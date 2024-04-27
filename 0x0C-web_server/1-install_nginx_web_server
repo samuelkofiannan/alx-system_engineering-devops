@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-set -e
+
+# Configures a new ubuntu machine by installing
+# Nginx where it should be listening on port 80
+# Serve a page that would return a Hello World string
 
 echo -e "Updating and installing Nginx.\n"
 sudo apt-get update -y -qq && \
@@ -7,33 +10,31 @@ sudo apt-get update -y -qq && \
 
 echo -e "\nSetting up some minor stuff.\n"
 
-# Check if Nginx is already installed
-if! dpkg -s nginx &> /dev/null; then
-    echo "Nginx is not installed, skipping..."
-else
-    # starting nginx service
-    sudo service nginx start
-
-    # Check if firewall is enabled
-    if! sudo ufw status | grep -q "enabled"; then
-        sudo ufw enable
-    fi
-
-    # allowing nginx on firewall
+# Check if ufw is installed and enabled
+if [ -x "$(command -v ufw)" ]; then
+    echo -e "Configuring ufw...\n"
     sudo ufw allow 'Nginx HTTP'
-
-    # Give the user ownership to website files for easy editing
-    sudo chown -R "$USER":"$USER" /var/www/html
-    sudo chmod -R 755 /var/www
-
-    # Backup default index
-    cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
-
-    # Creating new index
-    echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
-    # Restarting nginx
-    sudo service nginx restart
+else
+    echo -e "ufw is not installed. Skipping firewall configuration.\n"
 fi
+
+# Check if nginx service is already running
+if systemctl status nginx &> /dev/null; then
+    echo -e "Nginx service is already running. Restarting...\n"
+    sudo systemctl restart nginx
+else
+    echo -e "Starting nginx service...\n"
+    sudo systemctl start nginx
+fi
+
+# Give the user ownership to website files for easy editing
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# Backup default index
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+# Creating new index
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 echo -e "\nCompleted. ✅\n"
