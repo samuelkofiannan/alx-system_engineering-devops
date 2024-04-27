@@ -4,12 +4,6 @@ package { 'python3.8':
   provider   => 'apt',
 }
 
-# Install pip3 for Python3.8
-package { 'python3.8-pip':
-  ensure   => '21.2.4', # ensure pip3 version 21.2.4 is installed
-  provider   => 'apt',
-}
-
 # Install Flask 2.1.0 using pip3
 package { 'flask':
   ensure   => '2.1.0',
