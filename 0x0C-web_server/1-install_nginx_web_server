@@ -2,8 +2,10 @@
 # Install nginx
 # listening on port 80
 
-sudo apt-get update -y && sudo apt-get upgrade -y
-sudo apt-get install -y nginx
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install nginx -y
 sudo ufw allow 'Nginx HTTP'
-sudo /etc/init.d/nginx restart
+sudo ufw enable
+echo "Hello World!" > /var/www/html/index.html
+sudo service nginx restart
