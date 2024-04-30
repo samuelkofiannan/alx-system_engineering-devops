@@ -17,7 +17,7 @@ server {
         }
         
         if (\$request_filename ~* redirect_me){
-            rewrite ^ https://www.youtube.com/watch?v=ALpA6LQHSgI permanent;
+            rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
         }
 }
 EOF
