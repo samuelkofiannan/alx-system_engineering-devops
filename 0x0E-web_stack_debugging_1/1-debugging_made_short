@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# configures a server to listening on port 80 of all servers active IPv4 IPs
-
-sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
-sudo service nginx restart
-echo "" | sudo dd status=none of=/run/nginx.pid
+# Fixes the nginx listening port and reloads the nginx master process
+echo -e "sed -iE 's/listen 8080/listen 80/g' /etc/nginx/sites-enabled/default\
+sed -i 's/listen \[::\]:8080/listen \[::\]:80/g' /etc/nginx/sites-enabled/default\n
+pgrep nginx -o > /run/nginx.pid\nnginx -s reload\necho''> /run/nginx.pid" | bash
