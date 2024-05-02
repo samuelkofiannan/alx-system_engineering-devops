@@ -34,7 +34,7 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 
 #--omarflex.tech-params-begin--
-frontend omarflex.tech-frontend
+frontend omarflex-frontend
         bind *:80
         mode http
         http-request redirect scheme https code 301 unless { ssl_fc }
@@ -46,8 +46,7 @@ frontend omarflex.tech-frontend-https
         http-request set-header X-Forwarded-Proto https
         default_backend omarflex.tech-backend
 
-backend omarflex.texh-backend
+backend omarflex.tech-backend
         balance roundrobin
         server 530397-web-01 3.80.19.249:80 check
         server 530397-web-02 107.21.39.244:80 check
-#--omarflex.tech-params-end--
