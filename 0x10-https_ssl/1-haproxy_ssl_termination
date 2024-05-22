@@ -48,6 +48,6 @@ frontend omarflex.tech-frontend-https
 
 backend omarflex.texh-backend
         balance roundrobin
-        server 530397-web-01 3.80.19.249:80 check
+        server 530397-web-01 34.232.77.231:80 check
         server 530397-web-02 107.21.39.244:80 check
 #--omarflex.tech-params-end--
