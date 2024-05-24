@@ -19,6 +19,5 @@ sudo ufw allow 443/tcp
 
 # Enable Fire Wall
 sudo ufw enable
-sudo ufw reload
 
-echo -e "Process Completed.\n"
+sudo ufw reload
